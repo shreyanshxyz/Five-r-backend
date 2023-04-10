@@ -18,5 +18,6 @@ const connect = async () => {
 };
 
 app.listen(PORT, () => {
+  connect();
   console.log("Server Running");
 });
