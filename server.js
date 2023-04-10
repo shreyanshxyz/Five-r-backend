@@ -11,6 +11,7 @@ const conn_url =
 
 try {
   await mongoose.connect(conn_url);
+  console.log("Connected");
 } catch (error) {
   handleError(error);
 }
