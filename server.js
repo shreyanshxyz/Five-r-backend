@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import mongoose from "mongoose";
+import dotenv from "dotenv";
 const app = express();
 
 // temporary
@@ -8,7 +8,7 @@ const PORT = 8800;
 // -----------------
 
 try {
-  await mongoose.connect(conn_url);
+  await mongoose.connect(process.env.conn_url);
   console.log("Connected");
 } catch (error) {
   console.log(error);
