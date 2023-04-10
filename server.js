@@ -8,6 +8,8 @@ dotenv.config();
 const PORT = 8800;
 // -----------------
 
+const connect = async () => {};
+
 try {
   await mongoose.connect(process.env.conn_url);
   console.log("Connected");
