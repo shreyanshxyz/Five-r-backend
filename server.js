@@ -8,14 +8,14 @@ dotenv.config();
 const PORT = 8800;
 // -----------------
 
-const connect = async () => {};
-
-try {
-  await mongoose.connect(process.env.conn_url);
-  console.log("Connected");
-} catch (error) {
-  console.log(error);
-}
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.conn_url);
+    console.log("Connected");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 app.listen(PORT, () => {
   console.log("Server Running");
