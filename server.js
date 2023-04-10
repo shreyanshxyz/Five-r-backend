@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-
+import mongoose from "mongoose";
 const app = express();
 
 // temporary
@@ -11,7 +11,7 @@ try {
   await mongoose.connect(conn_url);
   console.log("Connected");
 } catch (error) {
-  handleError(error);
+  console.log(error);
 }
 
 app.listen(PORT, () => {
