@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const GigSchema = new Schema(
   {
+    // Owner of the gig
     userId: {
       type: String,
       required: true,
