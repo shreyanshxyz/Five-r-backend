@@ -43,7 +43,7 @@ export const login = async (req, res, next) => {
       .status(200)
       .send(info);
   } catch (err) {
-    res.status(500).send(err);
+    next(err);
   }
 };
 
