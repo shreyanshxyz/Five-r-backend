@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 const app = express();
+import userRoute from "./routes/user.route";
 
 dotenv.config();
 // temporary
@@ -16,6 +17,8 @@ const connect = async () => {
     console.log(error);
   }
 };
+
+app.use("/api/users", userRoute);
 
 app.listen(PORT, () => {
   connect();
