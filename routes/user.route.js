@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/test", (req, res) => {
   res.send("It works");
 });
-router.delete("/:id", verifyToken, deleteUser);
+router.delete("/:id", deleteUser);
 // router.get("/:id", getUser);
 
 export default router;
