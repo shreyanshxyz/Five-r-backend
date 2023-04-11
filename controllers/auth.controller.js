@@ -8,6 +8,9 @@ export const register = async (req, res) => {
       password: "test",
       country: "test",
     });
+
+    await newUser.save();
+    res.status(201).send("User Created");
   } catch (error) {
     res.status(500).send(error);
   }
