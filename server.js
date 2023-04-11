@@ -34,6 +34,13 @@ app.use("/api/users", userRoute);
 // app.use("/api/messages", messageRoute);
 // app.use("/api/reviews", reviewRoute);
 
+app.use((error, req, res, next) => {
+  const errorStatus = error.status || 500;
+  const errorMessage = error.message || "Something went wrong";
+
+  return res.status(errorStatus).send(errorMessage);
+});
+
 app.listen(process.env.PORT, () => {
   connect();
   console.log("Server Running");

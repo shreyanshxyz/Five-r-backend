@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const hash = bcrypt.hashSync(req.body.password, 10); // The 10 is the salt Number (Refer bcrypt docs)
     const newUser = new User({
@@ -13,15 +13,15 @@ export const register = async (req, res) => {
     await newUser.save();
     res.status(201).send("User Created");
   } catch (err) {
-    res.status(500).send(err);
+    next(err);
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    // console.log(user);
-    if (!user) return res.status(404).send("User Not Found");
+
+    if (!user) return next(err);
 
     const isCorrect = bcrypt.compareSync(req.body.password, user.password);
     // console.log(isCorrect);
