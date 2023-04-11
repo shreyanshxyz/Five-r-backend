@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 export const register = async (req, res) => {
   try {
+    const hash = bcrypt.hashSync(req.body.password, 10); // The 10 is the salt Number (Refer bcrypt docs)
     const newUser = new User(req.body);
 
     await newUser.save();
