@@ -6,7 +6,7 @@ export const register = async (req, res) => {
     const hash = bcrypt.hashSync(req.body.password, 10); // The 10 is the salt Number (Refer bcrypt docs)
     const newUser = new User({
       ...req.body, // What the spread operator does is that it takes all the data inside the body object as it is
-      password: hash, // EXCEPT FOR THE PASSWORD WHICH WE MENTIONED LATER because it will get hashed
+      password: hash, // THEN THE PASSWORD IS MENTIONED LATER because it will REPLACE THE PLAIN TEXT WITH THE HASHED PASSWORD
     });
 
     await newUser.save();
