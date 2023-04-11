@@ -5,9 +5,6 @@ const app = express();
 import userRoute from "./routes/user.route";
 
 dotenv.config();
-// temporary
-const PORT = 8800;
-// -----------------
 
 const connect = async () => {
   try {
