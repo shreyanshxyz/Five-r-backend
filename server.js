@@ -7,7 +7,7 @@ import userRoute from "./routes/user.route.js";
 // import conversationRoute from "./routes/conversation.route.js";
 // import messageRoute from "./routes/message.route.js";
 // import reviewRoute from "./routes/review.route.js";
-// import authRoute from "./routes/auth.route.js";
+import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -24,7 +24,7 @@ const connect = async () => {
   }
 };
 
-// app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 // app.use("/api/gigs", gigRoute);
 // app.use("/api/orders", orderRoute);
