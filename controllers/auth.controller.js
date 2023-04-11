@@ -11,11 +11,24 @@ export const register = async (req, res) => {
 
     await newUser.save();
     res.status(201).send("User Created");
-  } catch (error) {
-    res.status(500).send(error);
+  } catch (err) {
+    res.status(500).send(err);
   }
 };
 
-export const login = async (req, res) => {};
+export const login = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return res.status(404).send("User Not Found");
+
+    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    if (!isCorrect) return res.status(400).send("Wrong username/password");
+
+    const { password, ...info } = user._doc;
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
 
 export const logout = async (req, res) => {};
