@@ -45,13 +45,16 @@ export const getGigs = async (req, res, next) => {
   const q = req.query;
 
   const filters = {
+    ...(q.userId && { userId: q.userId }),
     ...(q.cat && { cat: q.cat }),
     // Firstly we check if we have minimum or maximum value
     // If we have even one of them we use them
+    // On that basis we filter
+    // If there is no min/max, we simply output the whole range
     ...((q.min || q.max) && {
       price: { ...(q.min && { $gt: q.min }), ...(q.max && { $gt: q.max }) },
     }),
-    title: { $regex: q.search, $options: "i" },
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
   };
   try {
     const gigs = await Gig.find(filters);
