@@ -42,8 +42,12 @@ export const getGig = async (req, res, next) => {
   }
 };
 export const getGigs = async (req, res, next) => {
+  const filters = {
+    cat: "design",
+    price: { $gt: 100 },
+  };
   try {
-    const gigs = await Gig.find();
+    const gigs = await Gig.find(filters);
     res.status(200).send(gigs);
   } catch (err) {
     next(err);
