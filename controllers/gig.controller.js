@@ -42,10 +42,16 @@ export const getGig = async (req, res, next) => {
   }
 };
 export const getGigs = async (req, res, next) => {
+  const q = req.query;
+
   const filters = {
-    cat: "design",
-    // price: { $gt: 100 },
-    title: { $regex: "Gig 1" },
+    ...(q.cat && { cat: q.cat }),
+    // Firstly we check if we have minimum or maximum value
+    // If we have even one of them we use them
+    ...((q.min || q.max) && {
+      price: { ...(q.min && { $gt: q.min }), ...(q.max && { $gt: q.max }) },
+    }),
+    title: { $regex: q.search, $options: "i" },
   };
   try {
     const gigs = await Gig.find(filters);
