@@ -33,6 +33,10 @@ export const deleteGig = async (req, res, next) => {
 };
 export const getGig = async (req, res, next) => {
   try {
+    // We first check if the user ID of that gig is our ID, then only we can see that gig.
+    const gig = await Gig.findById(req.params.id);
+    if (!gig) next(createError(404, "Gig Not Found"));
+    res.status(200).send(gig);
   } catch (err) {
     next(err);
   }
