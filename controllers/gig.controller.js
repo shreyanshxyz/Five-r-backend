@@ -44,7 +44,8 @@ export const getGig = async (req, res, next) => {
 export const getGigs = async (req, res, next) => {
   const filters = {
     cat: "design",
-    price: { $gt: 100 },
+    // price: { $gt: 100 },
+    title: { $regex: "Gig 1" },
   };
   try {
     const gigs = await Gig.find(filters);
